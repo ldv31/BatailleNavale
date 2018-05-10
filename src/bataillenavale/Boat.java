@@ -9,6 +9,7 @@ package bataillenavale;
  *
  * @author LDV
  * The boat class includes all parameter of boat, status and actions.
+ * test de diff
  */
 
 // This classe define "boat" used in bataille navale
