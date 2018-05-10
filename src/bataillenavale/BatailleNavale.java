@@ -15,7 +15,8 @@ public class BatailleNavale {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // Create a "BatailleNavaleManager" that will handle all the game logic
+        // ... and start the game
         BatailleNavaleManager myBatailleNavaleManager = new BatailleNavaleManager();
         myBatailleNavaleManager.runGame();
     }
