@@ -100,6 +100,12 @@ public class BatailleNavaleManager {
             
     public void runGame()
     {
+        // hit position
+        int [] hitPosition = new int[2];
+        
+        // battlefield cell utility
+        BattlefieldCell battleCell = new BattlefieldCell();
+        
         //scanner for input
         Scanner playerScanner = new Scanner(System.in);
         String playerInput;
@@ -121,8 +127,15 @@ public class BatailleNavaleManager {
             }
             else
             {
-                // convert caractère to coordinate
-                
+                // check position integrity
+                if (battleCell.initialise(playerInput.charAt(0), playerInput.charAt(1), xSize, ySize) == false)
+                {
+                    System.out.println("Valeur de tir incorrecte, essayez à nouveau (2 caractères)");
+                }
+                else
+                {
+                    // traiter le tir
+                }
             }
         }
         
