@@ -92,17 +92,8 @@ public class BatailleNavaleManager {
         //scanner for input
         Scanner playerScanner = new Scanner(System.in);
         String playerInput;
-        
-        /* @Anais, update the code in order to print the text below when the game is started
-          =============================
-          =                           =
-          =     Bataille Navale       =
-          =                           =
-          =============================
-        */
-        
-        
-        // @Anais, add the new code here
+
+        // Introduction of the game //
         System.out.println("\n=============================\n" +
         "=                           =\n" +
         "=     Bataille Navale       =\n" +
