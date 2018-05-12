@@ -92,7 +92,16 @@ public class BatailleNavaleManager {
         //scanner for input
         Scanner playerScanner = new Scanner(System.in);
         String playerInput;
+
+        // Introduction of the game //
+        System.out.println("\n=============================\n" +
+        "=                           =\n" +
+        "=     Bataille Navale       =\n" +
+        "=                           =\n" +
+        "============================= \n") ;
         
+        
+          
         // ask player for hit coordinate and provide result, till all boats are sunk
         while ((exitGame == false) && (numberOfBoatLeft > 0))
         {
