@@ -93,6 +93,24 @@ public class BatailleNavaleManager {
         Scanner playerScanner = new Scanner(System.in);
         String playerInput;
         
+        /* @Anais, update the code in order to print the text below when the game is started
+          =============================
+          =                           =
+          =     Bataille Navale       =
+          =                           =
+          =============================
+        */
+        
+        
+        // @Anais, add the new code here
+        System.out.println("\n=============================\n" +
+        "=                           =\n" +
+        "=     Bataille Navale       =\n" +
+        "=                           =\n" +
+        "============================= \n") ;
+        
+        
+          
         // ask player for hit coordinate and provide result, till all boats are sunk
         while ((exitGame == false) && (numberOfBoatLeft > 0))
         {
