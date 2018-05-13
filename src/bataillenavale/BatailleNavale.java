@@ -14,11 +14,18 @@ public class BatailleNavale {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String[] args) {
+        
+        // 0 for test, 1 for normal mode 
+        int runMode = 1;
+        
         // Create a "BatailleNavaleManager" that will handle all the game logic
         // ... and start the game
         BatailleNavaleManager myBatailleNavaleManager = new BatailleNavaleManager();
-        myBatailleNavaleManager.runGame();
-    }
-    
+        if (runMode == 1)
+            myBatailleNavaleManager.runGame();
+        else
+            myBatailleNavaleManager.testGameFunction();
+    }  
 }

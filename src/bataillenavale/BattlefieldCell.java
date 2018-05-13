@@ -11,17 +11,18 @@ package bataillenavale;
  */
 public class BattlefieldCell {
     
-    char xPosition;
-    int xPositionNumeric;
-    char yPosition;
-    int yPositionNumeric;
-    int xSize;
-    int ySize;
+    private char xPosition;
+    private int xPositionNumeric;
+    private char yPosition;
+    private int yPositionNumeric;
+    private int xSize;
+    private int ySize;
     
-    public boolean checkIntegrity ()
+    // Verify that the position is within the battle field
+    private boolean checkIntegrity ()
     {
         // check if position is in the battlefiel
-        if ((xPositionNumeric > xSize) || (xPositionNumeric > ySize) || (xPositionNumeric <=0) || (xPositionNumeric <=0))
+        if ((xPositionNumeric >= xSize) || (yPositionNumeric >= ySize) || (xPositionNumeric <0) || (yPositionNumeric <0))
             return false;
         else
             return true;
@@ -35,7 +36,7 @@ public class BattlefieldCell {
         this.xSize = xSize;
         this.ySize = ySize;
         xPositionNumeric = (int)xPosition - (int)'A';
-        yPositionNumeric = (int)xPosition - (int)'1';
+        yPositionNumeric = (int)yPosition - (int)'1';
         return checkIntegrity();
     }
     

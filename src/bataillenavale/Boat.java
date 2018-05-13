@@ -48,14 +48,14 @@ public class Boat {
     }
     
     // Compare too positions, if they intersect, return true
-    // use false for checking and true hor hit
+    // use false for checking and true for hit
     public boolean comparePosition (int position [], boolean hit)
     {
         boolean intersection = false;
         
-        for (int i = 0; i < position.length/2; i++)
+        for (int i = 0; i < this.position.length/2; i++)
         {
-            if ((this.position [i*2] == position [i*2]) && (this.position [i*2+1] == position [i*2+1]))
+            if ((this.position [i*2] == position [0]) && (this.position [i*2+1] == position [1]))
             {
                 intersection = true;
             }
@@ -64,7 +64,7 @@ public class Boat {
         if (intersection == true && hit == true)
         {
             hitPoint++;
-            if (hitPoint == position.length)
+            if (hitPoint == this.position.length/2)
                 sinkStatus = true;
         }
         return intersection;
@@ -81,5 +81,11 @@ public class Boat {
     public boolean getSinkStatus()
     {
         return sinkStatus;
+    }
+    
+    // get boat name
+    public String getboatName()
+    {
+        return name;
     }
 }

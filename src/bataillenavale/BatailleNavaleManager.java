@@ -19,9 +19,9 @@ public class BatailleNavaleManager {
     private final int boatSize = 3;
     private final String boatName[] = {"Boat1", "boat2", "boat3"};
     
-    // Battle field définiton
-    private final int xSize = 10;
-    private final int ySize = 10;
+    // Battle field définiton - Max value = 9
+    private final int xSize = 8;
+    private final int ySize = 8;
     
     // array of boats
     private Boat gameBoat [] = new Boat [boatNumber];
@@ -95,13 +95,17 @@ public class BatailleNavaleManager {
         "=                           =\n" +
         "=     Bataille Navale       =\n" +
         "=                           =\n" +
-        "============================= \n") ;
+        "============================= \n\n" +
+        "Info: Entrer quit pour sortir du jeux.\n") ;
     }
             
     public void runGame()
     {
-        // hit position
+        // hit position as entered by user (char type)
         int [] hitPosition = new int[2];
+        
+        // hit position for internal use (int type for array)
+        int [] hitPositionNumerical = new int[2];
         
         // battlefield cell utility
         BattlefieldCell battleCell = new BattlefieldCell();
@@ -120,29 +124,53 @@ public class BatailleNavaleManager {
             System.out.print("Entrez les coordonnées du tir: ");
             playerInput = playerScanner.nextLine();
            
-            // only two caracter for valid player coordinates entry
-            if (playerInput.length() != 2)
+            // Check if exit
+            if (playerInput.equalsIgnoreCase("quit"))
             {
-                System.out.println("Nombre de caractères incorrect, essayez à nouveau (2 caractères)");
+                exitGame = true;
+                System.out.println("\nQuiting game (user request)\n"); 
             }
             else
             {
-                // check position integrity
-                if (battleCell.initialise(playerInput.charAt(0), playerInput.charAt(1), xSize, ySize) == false)
+            
+                // only two caracter for valid player coordinates entry
+                if (playerInput.length() != 2)
                 {
-                    System.out.println("Valeur de tir incorrecte, essayez à nouveau (2 caractères)");
+                    // Position invalide
+                    System.out.println("Nombre de caractères incorrect, essayez à nouveau (2 caractères)");
                 }
                 else
                 {
+                    // check position integrity
+                    if (battleCell.initialise(playerInput.charAt(0), playerInput.charAt(1), xSize, ySize) == false)
+                    {
+                        // position invalide
+                        System.out.println("Valeur de tir incorrecte, essayez à nouveau (valeur en dehors de la grille)");
+                    }
+                    else
+                    {
                     // traiter le tir
+                        for (int i=0; i < boatNumber; i++)
+                        {
+                            battleCell.returnNumericalPosition(hitPositionNumerical);
+                            if (gameBoat[i].comparePosition(hitPositionNumerical, true))
+                            {
+                                System.out.println("This is a direct hit ! on boat: " + gameBoat[i].getboatName() + " , Boat sunk ? " + gameBoat[i].getSinkStatus());
+                            }
+                        }
+                    }
                 }
             }
-        }
+        }      
+    }
+    
+    public void testGameFunction()
+    {     
+        // set of test for functions
         
+        System.out.println("\nWARNING : RUNNING IN TEST MODE\n");
         
-        /*    
-        Test section, to be commented for normal use
-        
+        // Boat class function testing 
         int testBoat1Position [] = {0,0,1,1,2,2};
         int testBoat2Position [] = {0,0,4,4,5,5};
         Boat testBoat1 = new Boat("testBoat1", testBoat1Position);
@@ -150,6 +178,29 @@ public class BatailleNavaleManager {
         testBoat1.printPosition();
         // veify the comparePosition function
         System.out.println("Intersect result: " + testBoat1.comparePosition(testBoat2Position, false));
-        */
+        
+        // BattleFieldCell class function testing
+        BattlefieldCell cell = new BattlefieldCell();
+        
+        // BattlefiledCell initialise
+        if (cell.initialise('A', '1', xSize, ySize)== true)
+            System.out.println("Test BattlefieldCell #1: OK");
+        else
+            System.out.println("Test BattlefieldCell #1: KO");
+        
+        if (cell.initialise('X', '1', xSize, ySize)== false)
+            System.out.println("Test BattlefieldCell #2: OK");
+        else
+            System.out.println("Test BattlefieldCell #2: KO");
+        
+        if (cell.initialise('A', '9', xSize, ySize)== false)
+            System.out.println("Test BattlefieldCell #3: OK");
+        else
+            System.out.println("Test BattlefieldCell #3: KO");
+        
+        if (cell.initialise('D', '5', xSize, ySize)== true)
+            System.out.println("Test BattlefieldCell #4: OK");
+        else
+            System.out.println("Test BattlefieldCell #4: KO");
     }
 }
