@@ -94,6 +94,7 @@ public class BatailleNavaleManager {
         System.out.println("\n=============================\n" +
         "=                           =\n" +
         "=     Bataille Navale       =\n" +
+        "=          v1.0             =\n" +
         "=                           =\n" +
         "============================= \n\n" +
         "Info: Entrer quit pour sortir du jeux.\n") ;
@@ -101,6 +102,9 @@ public class BatailleNavaleManager {
             
     public void runGame()
     {
+        // variable to store the number of shoots (will be displayed at the end of the game)
+        int shootNumber = 0;
+        
         // variable to store the username
         String username = new String();
         
@@ -134,7 +138,7 @@ public class BatailleNavaleManager {
             if (playerInput.equalsIgnoreCase("quit"))
             {
                 exitGame = true;
-                System.out.println("\nQuiting game (user request)\n"); 
+                System.out.println("\nSortie du jeu (demande joueur)\n"); 
             }
             else
             {
@@ -155,19 +159,36 @@ public class BatailleNavaleManager {
                     }
                     else
                     {
-                    // traiter le tir
+                        // Increase the number of shoots
+                        shootNumber ++;
+                        
+                        // traiter le tir
                         for (int i=0; i < boatNumber; i++)
                         {
                             battleCell.returnNumericalPosition(hitPositionNumerical);
-                            if (gameBoat[i].comparePosition(hitPositionNumerical, true))
+                            if (gameBoat[i].getSinkStatus() == false && gameBoat[i].comparePosition(hitPositionNumerical, true))
                             {
-                                System.out.println("This is a direct hit ! on boat: " + gameBoat[i].getboatName() + " , Boat sunk ? " + gameBoat[i].getSinkStatus());
+                                System.out.println("Touché ! Bateau: " + gameBoat[i].getboatName() + " , Bateau coulé ? " + gameBoat[i].getSinkStatus());
+                                
+                                // decreae the number of boat left if a boat is sunk
+                                if (gameBoat[i].getSinkStatus() == true)
+                                {
+                                    numberOfBoatLeft--;
+                                }
+                                
                             }
                         }
                     }
                 }
             }
-        }      
+        }
+        
+        if (numberOfBoatLeft == 0)
+        {
+            System.out.println("Bravo " + username + " !");
+        }
+        
+        System.out.println("Vous avez tiré " + shootNumber + " tirs !");
     }
     
     private String getUsername()
