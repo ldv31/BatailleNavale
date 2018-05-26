@@ -101,6 +101,9 @@ public class BatailleNavaleManager {
             
     public void runGame()
     {
+        // variable to store the username
+        String username = new String();
+        
         // hit position as entered by user (char type)
         int [] hitPosition = new int[2];
         
@@ -116,12 +119,15 @@ public class BatailleNavaleManager {
 
         //Display the banner
         printBanner();
-          
+        
+        // ask the player for his name
+        username = getUsername();
+
         // ask player for hit coordinate and provide result, till all boats are sunk
         while ((exitGame == false) && (numberOfBoatLeft > 0))
         {
             // Prepare input 
-            System.out.print("Entrez les coordonnées du tir: ");
+            System.out.print("Entrez les coordonnées du tir, " + username + " : ");
             playerInput = playerScanner.nextLine();
            
             // Check if exit
@@ -162,6 +168,22 @@ public class BatailleNavaleManager {
                 }
             }
         }      
+    }
+    
+    private String getUsername()
+    {
+        Scanner playerScanner = new Scanner(System.in);
+        String playerInput;
+        System.out.print("Entrez votre nom: ");
+        playerInput = playerScanner.nextLine();
+        
+            /* Check if exit
+            if (playerInput.equalsIgnoreCase("quit"))
+            {
+                exitGame = true;
+                System.out.println("\nQuiting game (user request)\n"); 
+            } */
+        return playerInput;
     }
     
     public void testGameFunction()
