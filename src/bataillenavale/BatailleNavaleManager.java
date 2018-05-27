@@ -120,7 +120,7 @@ public class BatailleNavaleManager {
         // battlefield cell utility
         BattlefieldCell battleCell = new BattlefieldCell();
         
-        //scanner for input
+        // scanner for input
         Scanner playerScanner = new Scanner(System.in);
         String playerInput;
 
