@@ -102,6 +102,9 @@ public class BatailleNavaleManager {
             
     public void runGame()
     {
+        // Used to display the shooting result to the player
+        Boolean shootSuccessful = false;
+        
         // variable to store the number of shoots (will be displayed at the end of the game)
         int shootNumber = 0;
         
@@ -133,6 +136,7 @@ public class BatailleNavaleManager {
             // Prepare input 
             System.out.print("Entrez les coordonnées du tir, " + username + " : ");
             playerInput = playerScanner.nextLine();
+            playerInput = playerInput.toUpperCase();
            
             // Check if exit
             if (playerInput.equalsIgnoreCase("quit"))
@@ -169,15 +173,19 @@ public class BatailleNavaleManager {
                             if (gameBoat[i].getSinkStatus() == false && gameBoat[i].comparePosition(hitPositionNumerical, true))
                             {
                                 System.out.println("Touché ! Bateau: " + gameBoat[i].getboatName() + " , Bateau coulé ? " + gameBoat[i].getSinkStatus());
+                                shootSuccessful = true;
                                 
                                 // decreae the number of boat left if a boat is sunk
                                 if (gameBoat[i].getSinkStatus() == true)
                                 {
                                     numberOfBoatLeft--;
-                                }
-                                
-                            }
+                                } 
+                            } 
                         }
+                        if (shootSuccessful == false)
+                            {
+                                System.out.println("Raté !");
+                            }
                     }
                 }
             }
