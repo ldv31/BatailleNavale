@@ -55,9 +55,12 @@ public class Boat {
         
         for (int i = 0; i < this.position.length/2; i++)
         {
-            if ((this.position [i*2] == position [0]) && (this.position [i*2+1] == position [1]))
+            for (int j =0; j < position.length/2; j++)
             {
-                intersection = true;
+                if ((this.position [i*2] == position [j*2]) && (this.position [i*2+1] == position [j*2+1]))
+                {
+                    intersection = true;
+                }
             }
         }
         

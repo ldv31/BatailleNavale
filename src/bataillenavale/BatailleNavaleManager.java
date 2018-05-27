@@ -60,19 +60,43 @@ public class BatailleNavaleManager {
         int maxLoop = 50;
         boolean positionFound = false;
         
-        // check if the position is already used, if yes, loop till a position is found (max 20 loop)
+        // boat direction is horizontal(0) or veritacal (1)
+        int boatDirection; 
+        
+        // check if the position is already used, if yes, loop till a position is found (max = maxloop)
         while (maxLoop > 0 && positionFound == false)
         {
-           // calculate random position with the battlefield
-           for (int i=0; i < boatSize; i++)
+           // calculate a random position for a cell (firt cell of the poat)
+           Random rand = new Random();
+           // from the first cell the next cell position will be left or right so the bottom right corner can not be used
+           position[0] = rand.nextInt(xSize - (boatSize - 1));
+           position[1] = rand.nextInt(ySize - (boatSize - 1));
+
+           // calculate the next cells of the boat horizontally right or vertically bottom
+           boatDirection = rand.nextInt(2);
+           
+           if (boatDirection == 0)
            {
-               Random rand = new Random();
-               position[i*2] = rand.nextInt(xSize);
-               position[i*2+1] = rand.nextInt(ySize);
+               // boat is horizontal (only x is incremented)
+               for (int i=1; i < boatSize; i++)
+               {
+                    position[i*2] = position[(i-1)*2]+1;
+                    position[i*2+1] = position[(i-1)*2+1]; 
+               }
            }
+           else
+           {
+               // boat is vertical (only x is incremented)
+               for (int i=1; i < boatSize; i++)
+               {
+                    position[i*2] = position[(i-1)*2];
+                    position[i*2+1] = position[(i-1)*2+1]+1; 
+               }
+           }
+           
            positionFound = true;
             
-            // for each existing boat, check is the new position intersects
+            // for each existing boat, check is the new boat position intersects an existing one
             for (int j = 0; j < boatNumber; j++)
             {
                 if (gameBoat[j] != null)
