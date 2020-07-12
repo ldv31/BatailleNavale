@@ -21,7 +21,7 @@ public class BatailleNavale {
         int runMode = 1;
         
         // Create a "BatailleNavaleManager" that will handle all the game logic
-        // ... and start the game
+        // ... and also start the game
         BatailleNavaleManager myBatailleNavaleManager = new BatailleNavaleManager();
         if (runMode == 1)
             myBatailleNavaleManager.runGame();
